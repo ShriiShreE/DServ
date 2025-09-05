@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Teacher's Day!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+            transition: background 1.5s ease;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            max-width: 800px;
+            width: 90%;
+            z-index: 10;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            animation: colorChange 8s infinite alternate;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin: 20px 0;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn {
+            background: linear-gradient(to right, #ff9966, #ff5e62);
+            border: none;
+            border-radius: 50px;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, #ff5e62, #ff9966);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .message {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .confession {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.4rem;
+            margin: 30px 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quote-author {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        .signature {
+            font-weight: bold;
+            font-size: 1.8rem;
+            margin-top: 20px;
+            color: #FFD700;
+        }
+
+        .name-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .name-list li {
+            font-size: 1.8rem;
+            margin: 15px 0;
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        .heart {
+            color: #FF6B6B;
+            font-size: 2rem;
+            display: inline-block;
+            animation: pulse 1.5s infinite;
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            margin: 30px 0;
+            overflow: hidden;
+            display: none;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, #4ECDC4, #FF6B6B);
+            border-radius: 15px;
+            transition: width 0.8s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Balls animation section */
+        .balls-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: none;
+            z-index: 5;
+        }
+
+        .ball {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: bold;
+            padding: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation-timing-function: linear, ease-in-out;
+            animation-iteration-count: infinite;
+        }
+
+        .zabi-ball {
+            background: linear-gradient(135deg, #ff6b6b, #c0392b);
+            width: 100px;
+            height: 100px;
+            font-size: 1.2rem;
+            z-index: 6;
+            animation: bounce 2s infinite;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .message-ball {
+            background: linear-gradient(135deg, #4ecdc4, #2ecc71);
+            z-index: 5;
+            width: 80px;
+            height: 80px;
+            font-size: 0.9rem;
+        }
+
+        .dserv-ball {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            z-index: 7;
+            width: 90px;
+            height: 90px;
+            transition: transform 0.3s;
+        }
+
+        .bomb-blast {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #ff8800 0%, #ff5500 40%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 20;
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        @keyframes bombBlast {
+            0% { transform: scale(0); opacity: 1; }
+            50% { transform: scale(2); opacity: 0.8; }
+            100% { transform: scale(4); opacity: 0; }
+        }
+
+        @keyframes throwBall1 {
+            0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+            10% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(200px, -300px) scale(0.8); opacity: 0; }
+        }
+
+        @keyframes throwBall2 {
+            0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+            10% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(-300px, -200px) scale(0.8); opacity: 0; }
+        }
+
+        @keyframes throwBall3 {
+            0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+            10% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(250px, 200px) scale(0.8); opacity: 0; }
+        }
+
+        @keyframes throwBall4 {
+            0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+            10% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(-200px, 300px) scale(0.8); opacity: 0; }
+        }
+
+        @keyframes throwBall5 {
+            0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+            10% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(350px, -100px) scale(0.8); opacity: 0; }
+        }
+
+        @keyframes throwBall6 {
+            0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+            10% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(-350px, -150px) scale(0.8); opacity: 0; }
+        }
+
+        .final-thankyou {
+            font-size: 2rem;
+            margin: 30px 0;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes colorChange {
+            0% { color: #FFD700; }
+            25% { color: #FF6B6B; }
+            50% { color: #4ECDC4; }
+            75% { color: #FF9FF3; }
+            100% { color: #FEA47F; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes grow {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f0f;
+            opacity: 0.7;
+            animation: fall linear forwards;
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: twinkle linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .color-change-btn {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            .btn {
+                font-size: 1.2rem;
+                padding: 12px 30px;
+            }
+            .name-list li {
+                font-size: 1.5rem;
+            }
+            .confession {
+                font-size: 1.1rem;
+            }
+            .final-thankyou {
+                font-size: 1.5rem;
+            }
+            .ball {
+                width: 60px;
+                height: 60px;
+                font-size: 0.7rem;
+            }
+            .zabi-ball {
+                width: 80px;
+                height: 80px;
+                font-size: 1rem;
+            }
+            .dserv-ball {
+                width: 70px;
+                height: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="floating">Happy Teacher's Day!</h1>
+        
+        <button class="btn" id="fromBtn">From...</button>
+        
+        <div class="message" id="teamMessage">
+            <h2>DServ Buddies</h2>
+            <button class="btn" id="whoBtn">Who are they?</button>
+        </div>
+        
+        <div class="message" id="namesMessage">
+            <ul class="name-list">
+                <li>Shree</li>
+                <li>Ashish</li>
+                <li>Harjinder</li>
+                <li>Aman</li>
+                <li>Vardhan</li>
+                <li>Samaksh</li>
+            </ul>
+            <button class="btn" id="confessionBtn">Dil Ki Baat</button>
+        </div>
+        
+        <div class="message" id="confessionMessage">
+            <div class="confession">
+                We know that we might not be your best students,<br>
+                and maybe we're not even in your "good books",<br>
+                but we are huge fans of your teaching style!
+            </div>
+            <div class="confession">
+                We truly respect you from the bottom of our hearts.<br>
+                Your way of explaining concepts makes learning enjoyable!
+            </div>
+            <button class="btn" id="quoteBtn">Anything Else?</button>
+        </div>
+        
+        <div class="message" id="quoteMessage">
+            <div class="quote" id="quoteText"></div>
+            <div class="quote-author" id="quoteAuthor"></div>
+            <button class="btn" id="nextQuoteBtn">Anything Else?</button>
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar" id="progressBar">0%</div>
+            </div>
+            <button class="btn color-change-btn" id="colorChangeBtn">Change Background Color</button>
+        </div>
+        
+        <div class="message" id="surpriseMessage">
+            <div class="final-thankyou">
+                Thank you for everything, Sir! <span class="heart">❤️</span>
+            </div>
+            <button class="btn" id="showBallsBtn">Click for Special Surprise</button>
+        </div>
+    </div>
+
+    <!-- Balls Container -->
+    <div class="balls-container" id="ballsContainer">
+        <!-- Zabi Sir Ball -->
+        <div class="ball zabi-ball">
+            Zabi Sir
+        </div>
+        
+        <!-- Message Balls -->
+        <div class="ball message-ball" id="ball1" style="top: 20%; left: 50%; animation: throwBall1 8s infinite;">
+            Take Classes Live
+        </div>
+        
+        <div class="ball message-ball" id="ball2" style="top: 20%; left: 50%; animation: throwBall2 10s infinite;">
+            Don't Rely on Recordings
+        </div>
+        
+        <div class="ball message-ball" id="ball3" style="top: 20%; left: 50%; animation: throwBall3 12s infinite;">
+            Trust the Process
+        </div>
+        
+        <div class="ball message-ball" id="ball4" style="top: 20%; left: 50%; animation: throwBall4 9s infinite;">
+            Practice Daily
+        </div>
+        
+        <div class="ball message-ball" id="ball5" style="top: 20%; left: 50%; animation: throwBall5 11s infinite;">
+            Ask Questions
+        </div>
+        
+        <div class="ball message-ball" id="ball6" style="top: 20%; left: 50%; animation: throwBall6 13s infinite;">
+            Never Give Up
+        </div>
+        
+        <!-- DServ Buddies Ball -->
+        <div class="ball dserv-ball" id="dservBall" style="top: 50%; left: 50%;">
+            DServ Buddies
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create confetti
+            function createConfetti() {
+                const colors = ['#ff6b6b', '#4ecdc4', '#ffd700', '#fea47f, #9ff3ff', '#ff9ff3'];
+                for (let i = 0; i < 50; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = (Math.random() * 15 + 5) + 'px';
+                    confetti.style.height = (Math.random() * 15 + 5) + 'px';
+                    document.body.appendChild(confetti);
+                }
+            }
+
+            // Create stars
+            function createStars() {
+                for (let i = 0; i < 30; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star';
+                    star.style.left = Math.random() * 100 + 'vw';
+                    star.style.top = Math.random() * 100 + 'vh';
+                    star.style.width = (Math.random() * 20 + 10) + 'px';
+                    star.style.height = star.style.width;
+                    star.style.animationDuration = (Math.random() * 3 + 1) + 's';
+                    star.style.animationIterationCount = 'infinite';
+                    document.body.appendChild(star);
+                }
+            }
+
+            // Array of quotes from each member
+            const quotes = [
+                { text: "गुरु बिन ज्ञान नहीं, ज्ञान बिन मुक्ति नहीं। सर, आप हमारे लिए मार्गदर्शक हैं!", author: "Shree" },
+                { text: "गुरुर्ब्रह्मा गुरुर्विष्णुर्गुरुर्देवो महेश्वरः। गुरुरेव परं ब्रह्म तस्मै श्रीगुरवे नमः॥", author: "Ashish" },
+                { text: "ਇਕ ਅਚ੍ਹਾ ਗੁਰੂ ਇਕ ਮੋਮਬੱਤੀ ਵਰਗਾ ਹੁੰਦਾ ਹੈ, ਜੋ ਆਪਣੇ ਆਪ ਨੂੰ ਜਲਾਕے ਦੂਸਰਿਆਂ ਲਈ ਰੋਸ਼ਨੀ ਦਿੰਦਾ ਹੈ।", author: "Harjinder" },
+                { text: "ज्ञान के मामला में तो हमनी के बस एक ही बात कहनी है - सर, आपके जैसा टीचर हमें फिर कहीं ना मिले!", author: "Aman" },
+                { text: "गुरु तो होता है चिराग, जो ज्ञान की रोशनी से सबके जीवन को उजियार कर देता है。", author: "Vardhan" },
+                { text: "शिक्षक म्हणजे दिवा, जो आपल्या ज्ञानाच्या प्रकाशाने आमच्या जीवनाला उज्वल करतो.", author: "Samaksh" },
+                { text: "सर, आपण आम्हाला फक्त विषयच शिकवत नाही तर जीवन जगण्याची कला शिकवता!", author: "Shree" },
+                { text: "यथार्थ शिक्षणं जीवनस्य परिवर्तनं भवति। भवान् एव अस्माकं जीवनस्य सर्वोत्तमः मार्गदर्शकः अस्ति।", author: "Ashish" },
+                { text: "ਸਿੱਖਿਆ ਦੀ ਰੋਸ਼ਨੀ ਵਿੱਚ, ਤੁਸੀਂ ਸਾਨੂੰ ਨਾ ਸਿਰਫ਼ किताबी ज़िंदगी बल्कि असल ज़िंदगी भी जीना सिखाया है।", author: "Harjinder" },
+                { text: "सर, हमनी के पढ़ाई के अलावा जिंदगी के भी कई सबक सिखावल्स!", author: "Aman" },
+                { text: "ज्ञान की बात करें तो सर आपके पास है अनमोल खजाना, जो हमें बाँट के देते हैं हर दिन。", author: "Vardhan" },
+                { text: "शिक्षक म्हणजे एक बागवान, जो विद्यार्थ्यांना योग्य दिशेने वाढवतो आणि त्यांच्यातील सर्वोत्तम गुण बाहेर आणतो.", author: "Samaksh" },
+                { text: "सर, आपके पढ़ावे के तरीका से हमरा डर भाग गवन और पढ़ाई में मन लाग गवन!", author: "Shree" },
+                { text: "गुरुः साक्षात् परब्रह्म, तस्मै श्रीगुरवे नमः। भवतः मार्गदर्शनं विना अस्माकं जीवनं अधूरम् एव।", author: "Ashish" },
+                { text: "ਇਕ ਅਧਿਆਪਕ ਦਾ ਕੰਮ ਸਿਰਫ਼ किताबी जानकारी देना नहीं, बल्कि विद्यार्थी के जीवन को रोशन करना है।", author: "Harjinder" },
+                { text: "सर, आपके पढ़ावे के बाद तो हमनी के लगे कि कोन सा subject कठिन है - सब आसान लागे लागत!", author: "Aman" },
+                { text: "शिक्षक वो होता है जो समाज की नींव रखता है, और आप तो हमारे लिए पूरी इमारत बना दिए!", author: "Vardhan" },
+                { text: "शिक्षकाच्या मार्गदर्शनाशिवाय, ज्ञानाचा प्रवास अधुरा आहे. तुमचे मार्गदर्शन आमच्यासाठी मार्गदर्शक ताऱ्यासारखे आहे.", author: "Samaksh" },
+                { text: "सर, आपके जैसा टीचर मिलना हमरा सौभाग्य बा!", author: "Shree" },
+                { text: "विद्यादानं महादानं, विद्यार्थिनां कल्याणाय। भवतः सेवायां सर्वेऽपि विद्यार्थिनः कृतज्ञतां अनुभवन्ति।", author: "Ashish" },
+                { text: "ਇਕ ਅਧਿਆਪਕ ਦੀ ਸੱਚੀ ਕਾਮਯਾਬੀ ਉਸਦੇ ਵਿਦਿਆਰਥੀਆਂ ਦੀ कामयाबी ਵਿੱਚ ਲੁਕੀ ਹੁੰਦੀ ਹੈ, ਅਤੇ ਤੁਹਾਡੇ ਵਿਦਿਆਰਥी हमेशा कामयाब रहें।", author: "Harjinder" },
+                { text: "सर, आपके द्वारा सिखावल गईल बात हमेशा याद रखी जाएवे, चाहे exam खतम हो जाय या ना हो!", author: "Aman" },
+                { text: "गुरु की महिमा अपार, जो बनावे नर से नारायण। सर, आपके जैसा टीचर हमें फिर कहीं ना मिले!", author: "Vardhan" },
+                { text: "शिक्षक हा विद्यार्थ्याच्या जीवनातील एक अजस्त्र प्रकाशस्तंभ आहे, जो अंधारात मार्ग दाखवतो.", author: "Samaksh" },
+                { text: "सर, आपके पढ़ावे के कारण हमरा result हमेशा अच्छा आवत बा!", author: "Shree" },
+                { text: "यदि गुरुः प्रसन्नः, ततः सर्वं प्रसन्नम्। भवतः आशीर्वादेन अस्माकं जीवनं धन्यं जातम्।", author: "Ashish" },
+                { text: "ਗੁਰੂ ਦੀ ਕਦਰ ਉਸ ਵੇਲੇ ਹੋਤੀ ਹੈ ਜਦੋਂ ਵਿਦਿਆਰਥੀ ਉਸਦੇ ਸਿਖਾਏ ਰਾਹ 'ਤੇ ਚਲਕੇ कामयाबੀ हासिल करਦਾ ਹੈ।", author: "Harjinder" },
+                { text: "सर, आपके दिए गए ज्ञान से हमनी के जीवन में बहुत बदलाव आवेले!", author: "Aman" },
+                { text: "शिक्षक वो होता है जो आपको सोचना सिखाता है, न कि केवल याद करना。", author: "Vardhan" },
+                { text: "शिक्षकाचे काम फक्त पुस्तकांतून शिकवणे नसते, तर विद्यार्थ्याच्या मनातील जिज्ञासा जागृत करणे असते.", author: "Samaksh" },
+                { text: "सर, आपके जैसा टीचर होना हमरा सौभाग्य बा, हमेशा आपका आभार!", author: "Shree" },
+                { text: "गुरुः साक्षात् परं ब्रह्म, तस्मै श्री गुरवे नमः। भवतः कृपया अस्माकं जीवनं सफलं जातम्।", author: "Ashish" },
+                { text: "ਇਕ ਅਧਿਆਪਕ ਦਾ ਦਿਲ ਵਿਦਿਆरਥੀਆਂ ਲਈ ਉਵੇਂ ਹੀ ਧੜਕਦਾ ਹੈ ਜਿਵੇਂ ਇਕ ਮਾਂ ਦਾ ਦਿਲ ਆਪਣੇ ਬੱਚਿਆਂ ਲਈ ਧੜਕਦਾ ਹੈ।", author: "Harjinder" },
+                { text: "सर, आपके समय और मेहनत के लिए हमनी के हृदय से आभार!", author: "Aman" },
+                { text: "गुरु की कृपा से ही विद्या प्राप्त होती है, और आपने तो हम पर बहुत कृपा की है!", author: "Vardhan" },
+                { text: "शिक्षक हा विद्यार्थ्याच्या जीवनातील सर्वात महत्त्वाचा आधारस्तंभ असतो.", author: "Samaksh" },
+                { text: "सर, आपके पढ़ावे से हमरा confidence बढ़ गवन!", author: "Shree" },
+                { text: "गुरुर्देवो भवः, शिष्यः सेवकः भवः। भवतः सेवायां सर्वदा तत्पराः स्मः।", author: "Ashish" },
+                { text: "ਇਕ ਅਧਿਆਪਕ ਦਾ ਪ੍ਰਭਾਵ ਅਨੰਤ ਕਾਲ ਤੱਕ ਰਹਿੰਦਾ ਹੈ, ਉਹ ਕਦੇ ਵੀ ਨਹੀਂ ਜਾਣਦਾ ਕਿ ਉਸਦੀ ਪਹੁੰਚ ਕਿੱਥੇ ਤੱਕ ਹੁੰਦੀ ਹੈ।", author: "Harjinder" },
+                { text: "सर, आपके द्वारा सिखावल गईल हर बात हमनी के काम आवेला!", author: "Aman" },
+                { text: "शिक्षक वो होता है जो आपको तैयार करता है परीक्षा के लिए नहीं, जीवन के लिए。", author: "Vardhan" },
+                { text: "शिक्षक हे विद्यार्थ्याच्या जीवनातील सर्वोत्तम मार्गदर्शक असतात.", author: "Samaksh" },
+                { text: "सर, आपके ज्ञान का भंडार अनंत बा, हमेशा हमरा मार्गदर्शन करत रहिये!", author: "Shree" },
+                { text: "गुरुः साक्षात् परमेश्वरः, तस्मै श्रीगुरवे नमः। भवतः अनुग्रहं विना जीवनं असम्भवम्।", author: "Ashish" },
+                { text: "ਇਕ ਅਧਿਆਪਕ ਆਸ ਹਾਰਨ ਵਾਲਿਆਂ ਲਈ ਆਸ, ਡਰਨ ਵਾਲਿਆਂ ਲਈ ਹਿੰਮਤ ਅਤੇ ਭਟਕਨ ਵਾਲਿਆਂ ਲਈ ਰੋਸ਼ਨੀ ਹੁੰਦਾ ਹੈ।", author: "Harjinder" },
+                { text: "सर, आपके बिना तो हमनी के पढ़ाई अधूरी बा!", author: "Aman" },
+                { text: "गुरु का स्थान सर्वोच्च है, क्योंकि वह निस्वार्थ भाव से ज्ञान बाँटता है。", author: "Vardhan" },
+                { text: "शिक्षक हे समाजाचे वास्तविक शिल्पकार असतात.", author: "Samaksh" },
+                { text: "सर, आपके मार्गदर्शन में हमेशा हमरा विकास होत रहे!", author: "Shree" },
+                { text: "गुरुब्रह्मा गुरुर्विष्णुर्गुरुर्देवो महेश्वरः। गुरुः साक्षात्परं ब्रह्म तस्मै श्रीगुरवे नमः॥", author: "Ashish" },
+                { text: "ਇਕ ਅਧਿਆਪਕ ਲਈ ਸਭ ਤੋਂ ਵੱਡੀ ਪ੍ਰਾਪਤੀ ਉਸਦੇ ਵਿਦਿਆਰਥੀਆਂ ਦੀ ਕਾਮਯਾਬੀ ਹੁੰਦੀ ਹੈ।", author: "Harjinder" },
+                { text: "सर, आपके दिए गए ज्ञान से हमनी के जीवन में नई रोशनी आई बा!", author: "Aman" },
+                { text: "शिक्षक वो मोमबत्ती की तरह है जो खुद जलकर दूसरों को रोशनी देता है。", author: "Vardhan" },
+                { text: "शिक्षक हे वि�द्यार्थ्याच्या जीवनातील सर्वात महत्त्वाचे वळण देतात.", author: "Samaksh" }
+            ];
+
+            let quoteIndex = 0;
+            let clickCount = 0;
+            let dservSize = 90; // Initial size of DServ Buddies ball
+            let dservX = 50; // Initial X position (%)
+            let dservY = 50; // Initial Y position (%)
+            let gameActive = false;
+            let collisionCount = 0;
+            let dservSpeed = 2;
+
+            // Show the "From" button after 2 seconds
+            setTimeout(function() {
+                const fromBtn = document.getElementById('fromBtn');
+                fromBtn.style.opacity = 1;
+                fromBtn.style.transform = 'translateY(0)';
+                fromBtn.style.transition = 'opacity 1s, transform 1s';
+                
+                // Add bounce animation
+                setTimeout(function() {
+                    fromBtn.classList.add('bounce');
+                }, 1500);
+            }, 2000);
+
+            // Handle "From" button click
+            document.getElementById('fromBtn').addEventListener('click', function() {
+                this.style.display = 'none';
+                
+                // Show team message with animation
+                const teamMessage = document.getElementById('teamMessage');
+                teamMessage.style.display = 'block';
+                setTimeout(function() {
+                    teamMessage.style.opacity = 1;
+                    teamMessage.style.transform = 'translateY(0)';
+                    teamMessage.style.transition = 'opacity 1s, transform 1s';
+                }, 100);
+                
+                // Show "Who are they?" button after 2 seconds
+                setTimeout(function() {
+                    const whoBtn = document.getElementById('whoBtn');
+                    whoBtn.style.opacity = 1;
+                    whoBtn.style.transform = 'translateY(0)';
+                    whoBtn.style.transition = 'opacity 1s, transform 1s';
+                    whoBtn.classList.add('bounce');
+                }, 2000);
+                
+                createConfetti();
+                createStars();
+            });
+
+            // Handle "Who are they?" button click
+            document.getElementById('whoBtn').addEventListener('click', function() {
+                // Hide team message
+                const teamMessage = document.getElementById('teamMessage');
+                teamMessage.style.opacity = 0;
+                teamMessage.style.transform = 'translateY(20px)';
+                teamMessage.style.transition = 'opacity 0.5s, transform 0.5s';
+                
+                // Show names with delay between each
+                setTimeout(function() {
+                    teamMessage.style.display = 'none';
+                    const namesMessage = document.getElementById('namesMessage');
+                    namesMessage.style.display = 'block';
+                    
+                    setTimeout(function() {
+                        namesMessage.style.opacity = 1;
+                        namesMessage.style.transform = 'translateY(0)';
+                        namesMessage.style.transition = 'opacity 1s, transform 1s';
+                        
+                        // Animate each name with a delay
+                        const names = document.querySelectorAll('.name-list li');
+                        names.forEach((name, index) => {
+                            setTimeout(() => {
+                                name.style.opacity = 1;
+                                name.style.transform = 'translateX(0)';
+                                name.style.transition = `opacity 0.8s, transform 0.8s`;
+                                name.style.animation = `grow 0.8s forwards`;
+                            }, index * 400);
+                        });
+                        
+                        // Show confession button after all names
+                        setTimeout(() => {
+                            const confessionBtn = document.getElementById('confessionBtn');
+                            confessionBtn.style.opacity = 1;
+                            confessionBtn.style.transform = 'translateY(0)';
+                            confessionBtn.style.transition = 'opacity 1s, transform 1s';
+                        }, names.length * 400 + 500);
+                    }, 300);
+                }, 500);
+            });
+
+            // Handle "Dil Ki Baat" button click
+            document.getElementById('confessionBtn').addEventListener('click', function() {
+                const namesMessage = document.getElementById('namesMessage');
+                namesMessage.style.opacity = 0;
+                namesMessage.style.transform = 'translateY(20px)';
+                namesMessage.style.transition = 'opacity 0.5s, transform 0.5s';
+                
+                setTimeout(function() {
+                    namesMessage.style.display = 'none';
+                    const confessionMessage = document.getElementById('confessionMessage');
+                    confessionMessage.style.display = 'block';
+                    
+                    setTimeout(function() {
+                        confessionMessage.style.opacity = 1;
+                        confessionMessage.style.transform = 'translateY(0)';
+                        confessionMessage.style.transition = 'opacity 1s, transform 1s';
+                        
+                        // Show "Anything Else?" button after a delay
+                        setTimeout(() => {
+                            const quoteBtn = document.getElementById('quoteBtn');
+                            quoteBtn.style.opacity = 1;
+                            quoteBtn.style.transform = 'translateY(0)';
+                            quoteBtn.style.transition = 'opacity 1s, transform 1s';
+                        }, 1000);
+                    }, 300);
+                }, 500);
+            });
+
+            // Handle "Anything Else?" button click in confession message
+            document.getElementById('quoteBtn').addEventListener('click', function() {
+                const confessionMessage = document.getElementById('confessionMessage');
+                confessionMessage.style.opacity = 0;
+                confessionMessage.style.transform = 'translateY(20px)';
+                confessionMessage.style.transition = 'opacity 0.5s, transform 0.5s';
+                
+                setTimeout(function() {
+                    confessionMessage.style.display = 'none';
+                    showQuoteMessage();
+                }, 500);
+            });
+
+            // Show quote message
+            function showQuoteMessage() {
+                const quoteMessage = document.getElementById('quoteMessage');
+                quoteMessage.style.display = 'block';
+                
+                setTimeout(function() {
+                    quoteMessage.style.opacity = 1;
+                    quoteMessage.style.transform = 'translateY(0)';
+                    quoteMessage.style.transition = 'opacity 1s, transform 1s';
+                    
+                    // Show progress container
+                    const progressContainer = document.getElementById('progressContainer');
+                    progressContainer.style.display = 'block';
+                    
+                    // Show color change button
+                    const colorChangeBtn = document.getElementById('colorChangeBtn');
+                    colorChangeBtn.style.opacity = 1;
+                    colorChangeBtn.style.transform = 'translateY(0)';
+                    colorChangeBtn.style.transition = 'opacity 1s, transform 1s';
+                    
+                    // Show first quote
+                    showNextQuote();
+                }, 300);
+            }
+
+            // Show next quote
+            function showNextQuote() {
+                if (clickCount < 50) {
+                    const quoteText = document.getElementById('quoteText');
+                    const quoteAuthor = document.getElementById('quoteAuthor');
+                    const nextQuoteBtn = document.getElementById('nextQuoteBtn');
+                    const progressBar = document.getElementById('progressBar');
+                    
+                    // Fade out
+                    quoteText.style.opacity = 0;
+                    quoteAuthor.style.opacity = 0;
+                    
+                    setTimeout(() => {
+                        // Update quote
+                        quoteText.textContent = quotes[quoteIndex].text;
+                        quoteAuthor.textContent = `- ${quotes[quoteIndex].author}`;
+                        
+                        // Fade in
+                        quoteText.style.opacity = 1;
+                        quoteAuthor.style.opacity = 1;
+                        
+                        // Update progress
+                        clickCount++;
+                        const progressPercentage = (clickCount / 50) * 100;
+                        progressBar.style.width = `${progressPercentage}%`;
+                        progressBar.textContent = `${Math.round(progressPercentage)}%`;
+                        
+                        // Move to next quote (cycle through)
+                        quoteIndex = (quoteIndex + 1) % quotes.length;
+                        
+                        // Show next quote button
+                        nextQuoteBtn.style.opacity = 1;
+                        nextQuoteBtn.style.transform = 'translateY(0)';
+                        nextQuoteBtn.style.transition = 'opacity 1s, transform 1s';
+                    }, 500);
+                } else {
+                    // All quotes shown - show surprise
+                    showSurprise();
+                }
+            }
+
+            // Show surprise message
+            function showSurprise() {
+                const quoteMessage = document.getElementById('quoteMessage');
+                quoteMessage.style.opacity = 0;
+                quoteMessage.style.transform = 'translateY(20px)';
+                quoteMessage.style.transition = 'opacity 0.5s, transform 0.5s';
+                
+                setTimeout(function() {
+                    quoteMessage.style.display = 'none';
+                    const surpriseMessage = document.getElementById('surpriseMessage');
+                    surpriseMessage.style.display = 'block';
+                    
+                    setTimeout(function() {
+                        surpriseMessage.style.opacity = 1;
+                        surpriseMessage.style.transform = 'translateY(0)';
+                        surpriseMessage.style.transition = 'opacity 1s, transform 1s';
+                        
+                        // Create final celebration
+                        createConfetti();
+                        createStars();
+                        
+                        // Change background to celebration colors
+                        document.body.style.background = "linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 50%, #ffd700 100%)";
+                        
+                        // Show balls button after a delay
+                        setTimeout(() => {
+                            const showBallsBtn = document.getElementById('showBallsBtn');
+                            showBallsBtn.style.opacity = 1;
+                            showBallsBtn.style.transform = 'translateY(0)';
+                            showBallsBtn.style.transition = 'opacity 1s, transform 1s';
+                        }, 1000);
+                    }, 300);
+                }, 500);
+            }
+
+            // Handle "Next Quote" button click
+            document.getElementById('nextQuoteBtn').addEventListener('click', showNextQuote);
+
+            // Handle color change button click
+            document.getElementById('colorChangeBtn').addEventListener('click', function() {
+                const colors = [
+                    'linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)',
+                    'linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 100%)',
+                    'linear-gradient(135deg, #ffd700 0%, #f7971e 100%)',
+                    'linear-gradient(135deg, #ff9ff3 0%, #fd79a8 100%)',
+                    'linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%)',
+                    'linear-gradient(135deg, #f46b45 0%, #eea849 100%)',
+                    'linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%)',
+                    'linear-gradient(135deg, #3ca55c 0%, #b5ac49 100%)'
+                ];
+                
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                document.body.style.background = randomColor;
+                
+                // Add some confetti for fun
+                createConfetti();
+            });
+
+            // Handle show balls button click
+            document.getElementById('showBallsBtn').addEventListener('click', function() {
+                this.style.display = 'none';
+                const ballsContainer = document.getElementById('ballsContainer');
+                const surpriseMessage = document.getElementById('surpriseMessage');
+                
+                // Hide the surprise message and show the balls container
+                surpriseMessage.style.display = 'none';
+                ballsContainer.style.display = 'block';
+                
+                // Start the game
+                gameActive = true;
+                moveDservBall();
+                checkCollisions();
+                
+                // Create more confetti for celebration
+                createConfetti();
+                createStars();
+            });
+
+            // Function to move DServ Buddies ball
+            function moveDservBall() {
+                if (!gameActive) return;
+                
+                const dservBall = document.getElementById('dservBall');
+                
+                // Move randomly
+                dservX += (Math.random() * 2 - 1) * dservSpeed;
+                dservY += (Math.random() * 2 - 1) * dservSpeed;
+                
+                // Keep within bounds (entire page)
+                dservX = Math.max(5, Math.min(95, dservX));
+                dservY = Math.max(5, Math.min(95, dservY));
+                
+                // Update position
+                dservBall.style.left = `${dservX}%`;
+                dservBall.style.top = `${dservY}%`;
+                
+                // Continue animation
+                requestAnimationFrame(moveDservBall);
+            }
+
+            // Function to check for collisions
+            function checkCollisions() {
+                if (!gameActive) return;
+                
+                const dservBall = document.getElementById('dservBall');
+                const dservRect = dservBall.getBoundingClientRect();
+                
+                // Check each message ball
+                for (let i = 1; i <= 6; i++) {
+                    const ball = document.getElementById(`ball${i}`);
+                    if (!ball) continue;
+                    
+                    const ballRect = ball.getBoundingClientRect();
+                    
+                    // Check if balls are colliding
+                    if (
+                        dservRect.left < ballRect.right &&
+                        dservRect.right > ballRect.left &&
+                        dservRect.top < ballRect.bottom &&
+                        dservRect.bottom > ballRect.top
+                    ) {
+                        // Collision detected
+                        handleCollision(ballRect.left + ballRect.width / 2, ballRect.top + ballRect.height / 2);
+                    }
+                }
+                
+                // Continue checking
+                requestAnimationFrame(checkCollisions);
+            }
+
+            // Function to handle collision
+            function handleCollision(x, y) {
+                collisionCount++;
+                
+                // Create bomb blast effect
+                const blast = document.createElement('div');
+                blast.className = 'bomb-blast';
+                blast.style.left = `${x - 50}px`;
+                blast.style.top = `${y - 50}px`;
+                blast.style.animation = 'bombBlast 0.5s forwards';
+                document.getElementById('ballsContainer').appendChild(blast);
+                
+                // Remove blast after animation
+                setTimeout(() => {
+                    blast.remove();
+                }, 500);
+                
+                // Increase DServ ball size gradually
+                dservSize += 5;
+                const dservBall = document.getElementById('dservBall');
+                dservBall.style.width = `${dservSize}px`;
+                dservBall.style.height = `${dservSize}px`;
+                
+                // Increase speed temporarily
+                dservSpeed = 5;
+                setTimeout(() => {
+                    dservSpeed = 2;
+                }, 1000);
+                
+                // Move DServ ball away quickly
+                dservX += (dservX < 50) ? -10 : 10;
+                dservY += (dservY < 50) ? -10 : 10;
+                
+                // Check if DServ ball covers the entire screen
+                if (dservSize > Math.max(window.innerWidth, window.innerHeight) * 0.8) {
+                    endGame();
+                }
+            }
+
+            // Function to end the game
+            function endGame() {
+                gameActive = false;
+                
+                const dservBall = document.getElementById('dservBall');
+                const ballsContainer = document.getElementById('ballsContainer');
+                
+                // Make DServ ball cover the entire screen
+                dservBall.style.width = '100vw';
+                dservBall.style.height = '100vh';
+                dservBall.style.left = '0';
+                dservBall.style.top = '0';
+                dservBall.style.borderRadius = '0';
+                dservBall.style.fontSize = '3rem';
+                dservBall.style.justifyContent = 'center';
+                dservBall.style.alignItems = 'center';
+                dservBall.style.display = 'flex';
+                
+                // Hide other balls
+                for (let i = 1; i <= 6; i++) {
+                    const ball = document.getElementById(`ball${i}`);
+                    if (ball) ball.style.display = 'none';
+                }
+                
+                const zabiBall = document.querySelector('.zabi-ball');
+                if (zabiBall) zabiBall.style.display = 'none';
+                
+                // Show final message
+                setTimeout(() => {
+                    dservBall.innerHTML = 'DServ Buddies';
+                    dservBall.style.fontSize = '4rem';
+                    dservBall.style.fontWeight = 'bold';
+                    dservBall.style.textShadow = '3px 3px 6px rgba(0, 0, 0, 0.5)';
+                    
+                    // Add a restart button
+                    setTimeout(() => {
+                        const restartBtn = document.createElement('button');
+                        restartBtn.textContent = 'Play Again';
+                        restartBtn.className = 'btn';
+                        restartBtn.style.position = 'absolute';
+                        restartBtn.style.bottom = '50px';
+                        restartBtn.style.left = '50%';
+                        restartBtn.style.transform = 'translateX(-50%)';
+                        restartBtn.style.zIndex = '100';
+                        restartBtn.onclick = function() {
+                            location.reload();
+                        };
+                        ballsContainer.appendChild(restartBtn);
+                        
+                        // Show the button with animation
+                        setTimeout(() => {
+                            restartBtn.style.opacity = '1';
+                            restartBtn.style.transform = 'translateX(-50%) translateY(0)';
+                            restartBtn.style.transition = 'opacity 1s, transform 1s';
+                        }, 500);
+                    }, 2000);
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
